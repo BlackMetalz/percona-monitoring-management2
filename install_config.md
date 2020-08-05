@@ -32,10 +32,27 @@ pmm-agent is running.
 - Adding MySQL Metrics and Query Analytics
 + Permission required:
 ```
-CREATE USER 'pmm'@'localhost' IDENTIFIED BY 'pass' WITH MAX_USER_CONNECTIONS 10;
-GRANT SELECT, PROCESS, SUPER, REPLICATION CLIENT, RELOAD ON *.* TO 'pmm'@'localhost';
+CREATE USER 'pmm'@'127.0.0.1' IDENTIFIED BY 'pass' WITH MAX_USER_CONNECTIONS 10;
+GRANT SELECT, PROCESS, SUPER, REPLICATION CLIENT, RELOAD ON *.* TO 'pmm'@'127.0.0.1';
 ```
 + Add service:
 ```
 pmm-admin add mysql --query-source=perfschema --username=pmm --password=pass
 ```
++ More detail:
+```
+pmm-admin add mysql --username=pmm --password=pmm --query-source=perfschema ps-mysql 127.0.0.1:3306
+```
+
++ Also available in socket linux:
+```
+pmm-admin add mysql --socket=/var/path/to/mysql/socket
+```
+
++ Table statistics collection disabled (the limit is 1000, the actual table count is 2469).
+```
+
+pmm-admin add mysql --query-source=perfschema --username=pmm --password=pass --disable-tablestats
+```
+
+
