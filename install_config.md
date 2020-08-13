@@ -34,14 +34,23 @@ pmm-agent is running.
 ```
 CREATE USER 'pmm'@'127.0.0.1' IDENTIFIED BY 'pass' WITH MAX_USER_CONNECTIONS 10;
 GRANT SELECT, PROCESS, SUPER, REPLICATION CLIENT, RELOAD ON *.* TO 'pmm'@'127.0.0.1';
+FLUSH PRIVILEGES;
+
 ```
-+ Add service:
++ Add service: # https://www.percona.com/doc/percona-monitoring-and-management/2.x/manage/conf-mysql-perf-schema.html#perf-schema
 ```
-pmm-admin add mysql --query-source=perfschema --username=pmm --password=pass
+pmm-admin add mysql --query-source=perfschema --username=pmm --password=pass # Performance shema: 
 ```
++ Add service: #https://www.percona.com/doc/percona-monitoring-and-management/2.x/manage/conf-mysql-slow-log.html#conf-mysql-slow-log
+```
+pmm-admin add mysql --query-source=slowlog --username=pmm --password=pass
+```
+
 + More detail:
 ```
-pmm-admin add mysql --username=pmm --password=pmm --query-source=perfschema ps-mysql 127.0.0.1:3306
+pmm-admin add mysql --username=pmm --password=pass --query-source=perfschema ps-mysql 127.0.0.1:3306
+pmm-admin add mysql --username=pmm --password=pass --query-source=slowlog sl-mysql 127.0.0.1:3306
+
 ```
 
 + Also available in socket linux:
