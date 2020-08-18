@@ -63,5 +63,8 @@ pmm-admin add mysql --socket=/var/path/to/mysql/socket
 
 pmm-admin add mysql --query-source=perfschema --username=pmm --password=pass --disable-tablestats
 ```
-
++ Remove Node Export:
+```
+sed -i 's/\/node_exporter/\/no_node_exporter/g' /usr/local/percona/pmm2/config/pmm-agent.yaml
+```
 
